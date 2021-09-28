@@ -1,0 +1,25 @@
+Creating custom modules ejabberd 21
+help ==> https://docs.ejabberd.im/developer/extending-ejabberd/modules/
+
+
+/opt/ejabberd/.ejabberd-modules/sources/
+mkdir mod_hello_world
+cd mod_hello_world/
+mkdir src
+cd src
+touch mod_hello_world.erl
+nano mod_hello_world.erl 
+cd ..
+touch mod_hello_world.spec
+nano mod_hello_world.spec
+ejabberdctl modules_available
+ejabberdctl module_install mod_hello_world
+cd ..
+chown -R ejabberd:ejabberd mod_hello_world
+ejabberdctl module_install mod_hello_world
+
+//add the new module in the modules section 
+nano /opt/ejabberd/conf/ejabberd.yml
+ejabberdctl restart
+tail -f /opt/ejabberd/logs/ejabberd.log
+
