@@ -23,3 +23,10 @@ nano /opt/ejabberd/conf/ejabberd.yml
 ejabberdctl restart
 tail -f /opt/ejabberd/logs/ejabberd.log
 
+
+
+
+
+create custom submodules to be used in another modules
+https://gist.github.com/navneetgupta/a8a3518695605ec0a6236e7c4a6abda9
+
