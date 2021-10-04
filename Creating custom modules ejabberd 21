@@ -2,20 +2,34 @@ Creating custom modules ejabberd 21
 help ==> https://docs.ejabberd.im/developer/extending-ejabberd/modules/
 
 
-/opt/ejabberd/.ejabberd-modules/sources/
+first step check the ejabberdctl.cfg CONTRIB_MODULES_PATH=/opt/ejabberd/.ejabberd-modules
+
+if installed from binary this path of the contrib modules will be different
+
+so the sources folder will be in the contrib path. the new module path should be in the /opt/ejabberd/.ejabberd-modules/sources/new_module 
+
+
 mkdir mod_hello_world
 cd mod_hello_world/
 mkdir src
 cd src
 touch mod_hello_world.erl
 nano mod_hello_world.erl 
+
+the beam file need to be generated with the erlc conmmand 
+then the beam file should be copied to the /opt/ejabberd-version/lib/version/ebin
 cd ..
+
+spec file is mandatory
+
 touch mod_hello_world.spec
 nano mod_hello_world.spec
-ejabberdctl modules_available
-ejabberdctl module_install mod_hello_world
+
 cd ..
 chown -R ejabberd:ejabberd mod_hello_world
+ejabberdctl module_install mod_hello_world
+
+ejabberdctl modules_available
 ejabberdctl module_install mod_hello_world
 
 //add the new module in the modules section 
@@ -24,9 +38,21 @@ ejabberdctl restart
 tail -f /opt/ejabberd/logs/ejabberd.log
 
 
+IMPORTATNT : all files should have the ejabberd user permission 
+chown -R ejabberd:ejabberd /opt/ejabberd-21.04/lib/ejabberd-21.04/ebin/
+chown -R ejabberd:ejabberd /opt/ejabberd/.ejabberd-modules/sources/new_module 
 
 
 
 create custom submodules to be used in another modules
 https://gist.github.com/navneetgupta/a8a3518695605ec0a6236e7c4a6abda9
+
+
+https://github.com/processone/xmpp/issues/9
+
+
+other helpful links 
+https://github.com/processone/xmpp/issues/9#issuecomment-459379117
+
+
 
